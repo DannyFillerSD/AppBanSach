@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "373300514868",
+    "firebase_url": "https://appbansach-b187c-default-rtdb.firebaseio.com",
+    "project_id": "appbansach-b187c",
+    "storage_bucket": "appbansach-b187c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373300514868:android:79593748a78954de263a61",
+        "android_client_info": {
+          "package_name": "com.example.app_ban_sach"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhIbWh-El8yjupcakTuE1797w5KrHWmsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

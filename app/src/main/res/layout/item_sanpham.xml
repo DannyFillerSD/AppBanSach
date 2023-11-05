@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="185dp"
+    android:layout_height="270dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_itemsanpham"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="8dp">
+
+    <ImageView
+        android:id="@+id/imageSach"
+        android:layout_width="170dp"
+        android:layout_height="190dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/top3_1" />
+
+    <TextView
+        android:id="@+id/tvTenSach"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="14dp"
+        android:layout_marginTop="4dp"
+        android:text="Trải nghiệm khách hàng xuất sắc" />
+
+    <TextView
+        android:id="@+id/tvGia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:textColor="@color/red"
+        android:textSize="13dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="18dp"
+        android:text="160.000đ" />
+</LinearLayout>
