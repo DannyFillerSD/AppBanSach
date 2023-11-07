@@ -35,10 +35,9 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
     private ArrayList<Sach> listSach;
     SachAdapter sachAdapter;
     FirebaseDatabase db;
-    Button btnThemGH;
+    Button btnThemGH,btnMua;
     Sach curSach;
     TextView tvTroVe;
-    private String idUser = DangNhapActivity.auth.getUid();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +50,7 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
         imageHinh = findViewById(R.id.image_hinh);
         btnThemGH = findViewById(R.id.btn_ThemGioHang);
         tvTroVe = findViewById(R.id.tvTrove);
+        btnMua = findViewById(R.id.btn_MuaNgay);
 
         rcSachTuongTu = findViewById(R.id.rc_tuongTu);
         listSach = new ArrayList<>();
@@ -58,7 +58,7 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
         Intent i = getIntent();
         String tenSach = i.getStringExtra("tenSach");
         String theLoai = i.getStringExtra("theLoai");
-        double gia = i.getDoubleExtra("gia",0);
+        double gia = i.getDoubleExtra("gia",1);
         String hinh = i.getStringExtra("hinhAnh");
         String maSach = i.getStringExtra("maSach");
 
@@ -67,6 +67,13 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
         tvGiaSach.setText(String.valueOf(gia));
         Picasso.get().load(hinh).into(imageHinh);
         curSach = new Sach(tenSach,theLoai,gia,hinh,maSach);
+
+        btnMua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ChiTietSachActivity.this, curSach.getMaSach(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         // RecycleView Sách tương tự
@@ -96,8 +103,7 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
         btnThemGH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.getReference("GioHang").child(idUser).child("Sach").child(maSach).setValue(curSach);
-                Toast.makeText(ChiTietSachActivity.this, idUser, Toast.LENGTH_SHORT).show();
+                db.getReference("GioHang").child(DangNhapActivity.auth.getUid()).child("Sach").child(maSach).setValue(curSach);
             }
         });
 

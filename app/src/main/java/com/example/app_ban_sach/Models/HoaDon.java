@@ -1,7 +1,7 @@
 package com.example.app_ban_sach.Models;
 
 public class HoaDon {
-    private String HoaDon;
+    private String maHoaDon;
     private String maKhachHang;
     private String tenKhachHang;
     private double thanhTien;
@@ -10,19 +10,19 @@ public class HoaDon {
     public HoaDon(){}
 
     public HoaDon(String hoaDon, String maKhachHang, String tenKhachHang, double thanhTien, String ngayThanhToan) {
-        HoaDon = hoaDon;
+        maHoaDon = hoaDon;
         this.maKhachHang = maKhachHang;
         this.tenKhachHang = tenKhachHang;
         this.thanhTien = thanhTien;
         this.ngayThanhToan = ngayThanhToan;
     }
 
-    public String getHoaDon() {
-        return HoaDon;
+    public String getMaHoaDon() {
+        return maHoaDon;
     }
 
-    public void setHoaDon(String hoaDon) {
-        HoaDon = hoaDon;
+    public void setMaHoaDon(String maHoaDon) {
+        this.maHoaDon = maHoaDon;
     }
 
     public String getMaKhachHang() {

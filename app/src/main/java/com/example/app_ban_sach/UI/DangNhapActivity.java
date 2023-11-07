@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.app_ban_sach.MainActivity;
+import com.example.app_ban_sach.Models.Sach;
 import com.example.app_ban_sach.Models.TaiKhoan;
 import com.example.app_ban_sach.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -29,7 +30,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -40,9 +44,10 @@ public class DangNhapActivity extends AppCompatActivity {
     Button btnDangNhap;
     public static FirebaseAuth auth;
     public static TaiKhoan curUser;
-    FirebaseDatabase db;
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
     GoogleSignInClient googleSignInClient;
     String id;
+
 
     @Override
     protected void onStart() {
@@ -87,6 +92,20 @@ public class DangNhapActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful())
                                     {
+                                        db.getReference("TaiKhoan").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                                for(DataSnapshot danhsach : snapshot.getChildren())
+                                                {
+                                                    curUser = snapshot.getValue(TaiKhoan.class);
+                                                }
+                                            }
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
                                         Intent i = new Intent(DangNhapActivity.this, MainActivity.class);
                                         startActivity(i);
                                     }

@@ -63,10 +63,13 @@ public class DangKyActivity extends AppCompatActivity {
                                         if(task.isSuccessful())
                                         {
                                             TaiKhoan newTK = new TaiKhoan();
+                                            newTK.setEmail(email);
                                             newTK.setMatKhau(matKhau);
                                             newTK.setTenNguoiDung(tenNguoiDung);
+                                            newTK.setDiaChi("");
+                                            newTK.setSoDienThoai("");
 
-                                            db.getReference("TaiKhoan").child("Dannyfiller").setValue(newTK);
+                                            db.getReference("TaiKhoan").child(auth.getUid()).setValue(newTK);
 
                                             Toast.makeText(DangKyActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                                             finish();

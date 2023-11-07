@@ -81,7 +81,7 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
                         break;
                     case 3:
                         listSach.clear();
-                        theLoai = "Giáo Dục";
+                        theLoai = "Giáo Khoa";
                         getListSach(theLoai);
                         sachAdapter.notifyDataSetChanged();
                         break;
@@ -139,6 +139,7 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
         i.putExtra("hinhAnh",sach.getHinhAnh());
         i.putExtra("theLoai",sach.getTheLoai());
         i.putExtra("gia",sach.getGia());
+        i.putExtra("maSach",sach.getMaSach());
         Toast.makeText(getContext(), sach.getMaSach(), Toast.LENGTH_SHORT).show();
         startActivity(i);
     }

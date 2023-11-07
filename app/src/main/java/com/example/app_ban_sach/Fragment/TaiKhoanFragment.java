@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.app_ban_sach.Customer.SuaThongTinActivity;
 import com.example.app_ban_sach.Models.Sach;
 import com.example.app_ban_sach.Models.TaiKhoan;
 import com.example.app_ban_sach.R;
@@ -24,6 +25,7 @@ import java.io.Console;
 public class TaiKhoanFragment extends Fragment {
     TextView tvDangXuat,tvLienHe;
     FirebaseDatabase db;
+    TextView tvSuaThongTin;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class TaiKhoanFragment extends Fragment {
 
         tvDangXuat = v.findViewById(R.id.tvDangXuat);
         tvLienHe = v.findViewById(R.id.tvLienHe);
+        tvSuaThongTin = v.findViewById(R.id.tvChinhSuaThongTin);
 
 //        Sach sach = new Sach("Ngoại Ngữ","Giáo Dục",20000);
         db = FirebaseDatabase.getInstance();
@@ -50,6 +53,14 @@ public class TaiKhoanFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), DangNhapActivity.class);
+                startActivity(i);
+            }
+        });
+
+        tvSuaThongTin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), SuaThongTinActivity.class);
                 startActivity(i);
             }
         });

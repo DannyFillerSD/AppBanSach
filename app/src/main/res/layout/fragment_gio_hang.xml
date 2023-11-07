@@ -55,13 +55,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btnDatHang"
+            android:id="@+id/btnMua"
             android:layout_width="107dp"
             android:layout_height="39dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
             android:backgroundTint="#5DB075"
-            android:text="Button"
+            android:text="Mua"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

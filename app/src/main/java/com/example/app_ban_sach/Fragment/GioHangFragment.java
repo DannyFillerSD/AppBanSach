@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_ban_sach.Adapter.GioHangAdapter;
-import com.example.app_ban_sach.Adapter.SachAdapter;
+import com.example.app_ban_sach.Models.HoaDon;
 import com.example.app_ban_sach.Models.Sach;
 import com.example.app_ban_sach.R;
 import com.example.app_ban_sach.UI.DangNhapActivity;
@@ -22,9 +23,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack{
@@ -33,6 +34,7 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
     private GioHangAdapter gioHangAdapter;
     FirebaseDatabase db;
     TextView tvTongTien;
+    Button btnMua;
     private int tong = 0;
     private String idUSer = DangNhapActivity.auth.getUid();
     @Override
@@ -41,6 +43,7 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
         View v =inflater.inflate(R.layout.fragment_gio_hang, container, false);;
         //Ánh Xạ
         tvTongTien=v.findViewById(R.id.tvTongTien);
+        btnMua = v.findViewById(R.id.btnMua);
 
 
         getActivity().setTitle("Trang chủ");
@@ -62,8 +65,11 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
                 {
                     Sach sach = danhsach.getValue(Sach.class);
                     listSach.add(sach);
-                    tong+=sach.getGia();
+                    tong+=(sach.getGia() * sach.getSoLuong());
                     tvTongTien.setText(String.valueOf(tong) +" VND");
+                }
+                if(listSach.isEmpty()){
+                    tvTongTien.setText("0 VND");
                 }
                 gioHangAdapter.notifyDataSetChanged();
             }
@@ -73,6 +79,33 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
 
             }
         });
+
+        btnMua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmmss");
+                SimpleDateFormat ngayThue = new SimpleDateFormat("ddMMyyyyHHmm");
+
+                String currentDateandTime = sdf.format(new Date());
+                String ngayThueSach = ngayThue.format(new Date());
+
+                HoaDon hd = new HoaDon();
+                hd.setMaHoaDon(ngayThueSach);
+                hd.setMaKhachHang(DangNhapActivity.auth.getUid());
+                hd.setTenKhachHang(DangNhapActivity.curUser.getTenNguoiDung());
+                hd.setThanhTien(tong);
+
+                db.getReference("HoaDon").child(ngayThueSach).setValue(hd);
+                db.getReference("HoaDon").child(ngayThueSach).child("chiTietGioHang").setValue(listSach);
+                listSach.clear();
+                tvTongTien.setText("0 VND");
+                gioHangAdapter.notifyDataSetChanged();
+
+                Toast.makeText(getContext(), "Đã thanh toán thành công", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         return v;
     }
 

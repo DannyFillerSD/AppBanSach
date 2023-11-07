@@ -56,6 +56,35 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
         holder.btnXoa.setOnClickListener(view -> XoaCallBack.onClick(position,sach));
 
         int sl =sach.getSoLuong();
+        holder.edSoLuong.setText(String.valueOf(sl));
+        System.out.println(sl);
+
+        holder.btnCong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int cong = sach.getSoLuong() + 1;
+                sach.setSoLuong(cong);
+                FirebaseDatabase db = FirebaseDatabase.getInstance();
+                db.getReference("GioHang").child(DangNhapActivity.auth.getUid()).child("Sach").child(sach.getMaSach()).setValue(sach);
+            }
+        });
+
+        holder.btnTru.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int tru = sach.getSoLuong() - 1;
+                if (tru < 0 )
+                {
+                    tru = 0;
+                }
+                sach.setSoLuong(tru);
+                FirebaseDatabase db = FirebaseDatabase.getInstance();
+                db.getReference("GioHang").child(DangNhapActivity.auth.getUid()).child("Sach").child(sach.getMaSach()).setValue(sach);
+            }
+        });
+
+
+
         holder.btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,8 +93,9 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
                 db.getReference("GioHang").child(DangNhapActivity.auth.getUid()).child("Sach").child(sach.getMaSach()).removeValue(new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-//                        Toast.makeText(v.getContext(),"Đã Xóa",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(),"Đã Xóa",Toast.LENGTH_SHORT).show();
                         notifyDataSetChanged();
+
                     }
                 });
             }

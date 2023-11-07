@@ -28,8 +28,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".UI.DangKyActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Customer.SuaThongTinActivity"
             android:exported="true" />
 
     </application>

@@ -67,13 +67,13 @@
 
         <EditText
             android:id="@+id/edSoLuongGH"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="64dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="4dp"
             android:gravity="center"
             android:inputType="number"
-            android:textSize="16sp"
             android:padding="0dp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/btnCong"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/btnTru"
