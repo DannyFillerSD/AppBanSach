@@ -145,7 +145,7 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
         i.putExtra("theLoai",sach.getTheLoai());
         i.putExtra("gia",sach.getGia());
         i.putExtra("maSach",sach.getMaSach());
-        Toast.makeText(getContext(), sach.getMaSach(), Toast.LENGTH_SHORT).show();
+
         startActivity(i);
     }
 }
