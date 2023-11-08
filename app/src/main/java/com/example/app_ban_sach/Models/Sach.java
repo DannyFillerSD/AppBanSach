@@ -6,7 +6,7 @@ public class Sach {
     private double gia;
     private String hinhAnh;
     private String maSach;
-    private int soLuong;
+    private int soLuong = 1;
     public Sach (){}
 
     public Sach(String tenSach, String theLoai, double gia, String hinhAnh, String maSach, int soLuong) {

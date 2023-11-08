@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="Chỉnh sửa thông tin"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@id/top"

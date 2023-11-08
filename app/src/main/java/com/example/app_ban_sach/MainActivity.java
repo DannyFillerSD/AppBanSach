@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void LoadFragment(Fragment fmNew){
+    public void LoadFragment(Fragment fmNew){
         FragmentTransaction fmTranform = getSupportFragmentManager().beginTransaction();
         fmTranform.replace(R.id.fragment_container,fmNew);
         fmTranform.addToBackStack(null);

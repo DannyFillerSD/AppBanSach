@@ -6,6 +6,7 @@ public class TaiKhoan {
     private String tenNguoiDung;
     private String soDienThoai;
     private String diaChi;
+    private int vaiTro;
 
     public TaiKhoan(){}
 
@@ -15,6 +16,15 @@ public class TaiKhoan {
         this.tenNguoiDung = tenNguoiDung;
         this.soDienThoai = soDienThoai;
         this.diaChi = diaChi;
+    }
+
+    public TaiKhoan(String email, String matKhau, String tenNguoiDung, String soDienThoai, String diaChi, int vaiTro) {
+        this.email = email;
+        this.matKhau = matKhau;
+        this.tenNguoiDung = tenNguoiDung;
+        this.soDienThoai = soDienThoai;
+        this.diaChi = diaChi;
+        this.vaiTro = vaiTro;
     }
 
     public String getEmail() {
@@ -55,5 +65,13 @@ public class TaiKhoan {
 
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
+    }
+
+    public int getVaiTro() {
+        return vaiTro;
+    }
+
+    public void setVaiTro(int vaiTro) {
+        this.vaiTro = vaiTro;
     }
 }

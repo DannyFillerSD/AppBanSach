@@ -13,12 +13,22 @@
         android:theme="@style/Theme.App_ban_sach"
         tools:targetApi="31">
         <activity
+            android:name=".Admin.ThemSachActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.TrangChuAdminActivity"
+            android:exported="false"
+            android:label="@string/title_activity_trang_chu_admin"
+            android:theme="@style/Theme.App_ban_sach" />
+        <activity
+            android:name=".UI.QuenMatKhauActivity"
+            android:exported="false" />
+        <activity
             android:name=".Customer.ChiTietSachActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".UI.DangNhapActivity"
             android:exported="true">
@@ -28,14 +38,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".UI.DangKyActivity"
             android:exported="true" />
         <activity
             android:name=".Customer.SuaThongTinActivity"
             android:exported="true" />
-
     </application>
+
 </manifest>

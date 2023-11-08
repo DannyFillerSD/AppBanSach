@@ -36,6 +36,7 @@
         android:layout_marginTop="16dp"
         android:paddingLeft="16dp"
         android:background="@drawable/edittext"
+        android:inputType="textPassword"
         android:hint="Mật Khẩu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

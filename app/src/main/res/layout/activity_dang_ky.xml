@@ -63,6 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edTenNguoiDung" />
 
@@ -73,6 +74,7 @@
         android:layout_marginStart="8dp"
         android:text="Tôi chấp nhận mọi điều khoản"
         android:textColor="#BDBDBD"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/robtnChapNhanDK"
         app:layout_constraintTop_toBottomOf="@+id/edTenNguoiDung"

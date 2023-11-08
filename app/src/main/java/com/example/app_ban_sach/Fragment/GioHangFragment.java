@@ -1,10 +1,12 @@
 package com.example.app_ban_sach.Fragment;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +35,8 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
     private RecyclerView rcGioHang;
     private GioHangAdapter gioHangAdapter;
     FirebaseDatabase db;
-    TextView tvTongTien;
+    TextView tvTongTien,tvTrong;
+    ImageView imTrong;
     Button btnMua;
     private int tong = 0;
     private String idUSer = DangNhapActivity.auth.getUid();
@@ -44,6 +47,9 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
         //Ánh Xạ
         tvTongTien=v.findViewById(R.id.tvTongTien);
         btnMua = v.findViewById(R.id.btnMua);
+        tvTrong = v.findViewById(R.id.tv_trong);
+        imTrong = v.findViewById(R.id.im_empty);
+
 
 
         getActivity().setTitle("Trang chủ");
@@ -70,6 +76,11 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
                 }
                 if(listSach.isEmpty()){
                     tvTongTien.setText("0 VND");
+                    imTrong.setVisibility(v.VISIBLE);
+                    tvTrong.setVisibility(v.VISIBLE);
+                }else {
+                    imTrong.setVisibility(v.INVISIBLE);
+                    tvTrong.setVisibility(v.INVISIBLE);
                 }
                 gioHangAdapter.notifyDataSetChanged();
             }
@@ -105,7 +116,14 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
             }
         });
 
+        imTrong.setVisibility(v.INVISIBLE);
+        tvTrong.setVisibility(v.INVISIBLE);
 
+        if(listSach.isEmpty())
+        {
+            imTrong.setVisibility(v.VISIBLE);
+            tvTrong.setVisibility(v.VISIBLE);
+        }
         return v;
     }
 

@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.Console;
 
 public class TaiKhoanFragment extends Fragment {
-    TextView tvDangXuat,tvLienHe;
+    TextView tvDangXuat,tvLienHe,tvTenCaNhan,tvIdCaNhan;
     FirebaseDatabase db;
     TextView tvSuaThongTin;
     @Override
@@ -36,9 +36,13 @@ public class TaiKhoanFragment extends Fragment {
         tvDangXuat = v.findViewById(R.id.tvDangXuat);
         tvLienHe = v.findViewById(R.id.tvLienHe);
         tvSuaThongTin = v.findViewById(R.id.tvChinhSuaThongTin);
+        tvTenCaNhan = v.findViewById(R.id.tvTenCaNhan);
+        tvIdCaNhan = v.findViewById(R.id.tvIdCaNhan);
 
 //        Sach sach = new Sach("Ngoại Ngữ","Giáo Dục",20000);
         db = FirebaseDatabase.getInstance();
+        tvIdCaNhan.setText(DangNhapActivity.auth.getUid());
+        tvTenCaNhan.setText(DangNhapActivity.curUser.getTenNguoiDung());
 
 
         tvLienHe.setOnClickListener(new View.OnClickListener() {

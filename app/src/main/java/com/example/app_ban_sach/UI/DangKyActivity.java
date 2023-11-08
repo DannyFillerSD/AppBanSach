@@ -68,6 +68,7 @@ public class DangKyActivity extends AppCompatActivity {
                                             newTK.setTenNguoiDung(tenNguoiDung);
                                             newTK.setDiaChi("");
                                             newTK.setSoDienThoai("");
+                                            newTK.setVaiTro(1);
 
                                             db.getReference("TaiKhoan").child(auth.getUid()).setValue(newTK);
 

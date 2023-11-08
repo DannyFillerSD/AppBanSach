@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="64dp"
+        android:background="#5DB075">
 
         <TextView
             android:id="@+id/tvTrove"
@@ -19,8 +20,10 @@
             android:layout_marginTop="16dp"
             android:clickable="true"
             android:focusedSearchResultHighlightColor="@color/white"
-            android:text="trở vè"
-            android:textSize="16sp"
+            android:text="trở về"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -152,6 +155,7 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:text="Thêm hàng vào giỏ"
+                    android:backgroundTint="#5DB075"
                     android:textColor="@color/white"
                     android:textSize="16dp" />
 
@@ -160,6 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:backgroundTint="#5DB075"
                     android:background="@drawable/bg_button"
                     android:paddingLeft="35dp"
                     android:paddingRight="35dp"

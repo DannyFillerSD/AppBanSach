@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.app_ban_sach.Adapter.SachAdapter;
+import com.example.app_ban_sach.Fragment.GioHangFragment;
+import com.example.app_ban_sach.MainActivity;
 import com.example.app_ban_sach.Models.Sach;
 import com.example.app_ban_sach.Models.TaiKhoan;
 import com.example.app_ban_sach.R;
@@ -58,20 +60,20 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
         Intent i = getIntent();
         String tenSach = i.getStringExtra("tenSach");
         String theLoai = i.getStringExtra("theLoai");
-        double gia = i.getDoubleExtra("gia",1);
+        double gia = i.getDoubleExtra("gia",0);
         String hinh = i.getStringExtra("hinhAnh");
         String maSach = i.getStringExtra("maSach");
 
         tvTenSach.setText(tenSach);
         tvTheLoai.setText(theLoai);
-        tvGiaSach.setText(String.valueOf(gia));
+        tvGiaSach.setText(String.format("%.0f", gia) + " VNĐ");
         Picasso.get().load(hinh).into(imageHinh);
         curSach = new Sach(tenSach,theLoai,gia,hinh,maSach);
 
         btnMua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChiTietSachActivity.this, curSach.getMaSach(), Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -104,6 +106,7 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
             @Override
             public void onClick(View v) {
                 db.getReference("GioHang").child(DangNhapActivity.auth.getUid()).child("Sach").child(maSach).setValue(curSach);
+                Toast.makeText(ChiTietSachActivity.this, "Thêm Giỏ Hàng Thành Công", Toast.LENGTH_SHORT).show();
             }
         });
 

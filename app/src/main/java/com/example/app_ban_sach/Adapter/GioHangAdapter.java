@@ -51,7 +51,8 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Sach sach =gioHangList.get(position);
         holder.tvTenSach.setText(gioHangList.get(position).getTenSach());
-        holder.tvGia.setText(String.valueOf(gioHangList.get(position).getGia()));
+
+        holder.tvGia.setText(String.format("%.0f", gioHangList.get(position).getGia())  + " VNĐ");
         Picasso.get().load(gioHangList.get(position).getHinhAnh()).into(holder.imSachGH);
         holder.btnXoa.setOnClickListener(view -> XoaCallBack.onClick(position,sach));
 
@@ -73,9 +74,9 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
             @Override
             public void onClick(View v) {
                 int tru = sach.getSoLuong() - 1;
-                if (tru < 0 )
+                if (tru < 1 )
                 {
-                    tru = 0;
+                    tru = 1;
                 }
                 sach.setSoLuong(tru);
                 FirebaseDatabase db = FirebaseDatabase.getInstance();

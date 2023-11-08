@@ -11,6 +11,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,6 +38,8 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
     private FirebaseDatabase db;
     private String theLoai = "Văn Học";
     TabLayout tabLayout;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,6 +59,8 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
 
         //tab item
         tabLayout = v.findViewById(R.id.tabLayout);
+        TabLayout.Tab tab = tabLayout.getTabAt(0); // Count Starts From 0
+        tab.select();
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

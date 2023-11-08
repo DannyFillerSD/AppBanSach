@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.app_ban_sach.Admin.TrangChuAdminActivity;
 import com.example.app_ban_sach.MainActivity;
 import com.example.app_ban_sach.Models.Sach;
 import com.example.app_ban_sach.Models.TaiKhoan;
@@ -39,7 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DangNhapActivity extends AppCompatActivity {
     EditText edTaiKhoan,edMatKhau;
-    TextView tvDangKy;
+    TextView tvDangKy,tvQuenMK;
     CircleImageView tvGoogle;
     Button btnDangNhap;
     public static FirebaseAuth auth;
@@ -64,6 +65,7 @@ public class DangNhapActivity extends AppCompatActivity {
         edTaiKhoan = findViewById(R.id.edEmail);
         edMatKhau = findViewById(R.id.edMatKhau);
         tvGoogle = findViewById(R.id.tvGoogle);
+        tvQuenMK = findViewById(R.id.tvQuenMK);
 
         auth= FirebaseAuth.getInstance();
 
@@ -100,14 +102,21 @@ public class DangNhapActivity extends AppCompatActivity {
                                                 {
                                                     curUser = snapshot.getValue(TaiKhoan.class);
                                                 }
+                                                if(curUser.getVaiTro() == 0)
+                                                {
+                                                    Intent i = new Intent(DangNhapActivity.this, TrangChuAdminActivity.class);
+                                                    startActivity(i);
+                                                }if(curUser.getVaiTro() == 1){
+                                                    Intent i = new Intent(DangNhapActivity.this, MainActivity.class);
+                                                    startActivity(i);
+                                                }
                                             }
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError error) {
 
                                             }
                                         });
-                                        Intent i = new Intent(DangNhapActivity.this, MainActivity.class);
-                                        startActivity(i);
+
                                     }
                                     else
                                     {
@@ -132,6 +141,15 @@ public class DangNhapActivity extends AppCompatActivity {
                 SignIn();
             }
         });
+
+        tvQuenMK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DangNhapActivity.this,QuenMatKhauActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
     int RC_SIGN_IN = 40;
     private void SignIn(){
@@ -164,4 +182,6 @@ public class DangNhapActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
