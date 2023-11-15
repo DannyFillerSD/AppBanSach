@@ -1,6 +1,7 @@
 package com.example.app_ban_sach.Adapter;
 
 import android.content.Context;
+import android.icu.text.DecimalFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,8 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Sach sach =sachList.get(position);
         holder.tvTenSach.setText(sachList.get(position).getTenSach());
-        holder.tvGia.setText(String.format("%.0f", sachList.get(position).getGia()) + " VNĐ");
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        holder.tvGia.setText(decimalFormat.format(sachList.get(position).getGia()) + " VNĐ");
         Picasso.get().load(sachList.get(position).getHinhAnh()).into(holder.imageSach);
         holder.itemView.setOnClickListener(view -> sachCall.onClick(position,sach));
     }

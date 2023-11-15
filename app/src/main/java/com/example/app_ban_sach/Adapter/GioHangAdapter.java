@@ -1,6 +1,7 @@
 package com.example.app_ban_sach.Adapter;
 
 import android.content.Context;
+import android.icu.text.DecimalFormat;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,8 +52,8 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Sach sach =gioHangList.get(position);
         holder.tvTenSach.setText(gioHangList.get(position).getTenSach());
-
-        holder.tvGia.setText(String.format("%.0f", gioHangList.get(position).getGia())  + " VNĐ");
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        holder.tvGia.setText( decimalFormat.format(gioHangList.get(position).getGia())  + " VNĐ");
         Picasso.get().load(gioHangList.get(position).getHinhAnh()).into(holder.imSachGH);
         holder.btnXoa.setOnClickListener(view -> XoaCallBack.onClick(position,sach));
 

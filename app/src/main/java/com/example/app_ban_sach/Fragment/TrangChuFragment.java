@@ -58,7 +58,6 @@ public class TrangChuFragment extends Fragment implements  SachAdapter.CallBack 
         View v = inflater.inflate(R.layout.fragment_trang_chu, container, false);
 
         getActivity().setTitle("Trang chủ");
-
         db = FirebaseDatabase.getInstance();
 
         listSach = new ArrayList<>();

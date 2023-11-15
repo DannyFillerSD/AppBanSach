@@ -12,7 +12,7 @@ import com.example.app_ban_sach.UI.DangNhapActivity;
 
 public class TrangChuAdminActivity extends AppCompatActivity {
 
-    TextView tvThemSach,tvTroVe;
+    TextView tvThemSach,tvSach,tvTroVe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +20,7 @@ public class TrangChuAdminActivity extends AppCompatActivity {
 
         tvThemSach = findViewById(R.id.tvThemSach);
         tvTroVe = findViewById(R.id.tvTroVeThemSachAdmin);
+        tvSach = findViewById(R.id.tvSach);
 
         tvTroVe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +37,17 @@ public class TrangChuAdminActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        tvSach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(TrangChuAdminActivity.this,SachAdminActivity.class);
+                startActivity(i);
+            }
+        });
+
+
+
 
     }
 }

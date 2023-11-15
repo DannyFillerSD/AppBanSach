@@ -1,5 +1,6 @@
 package com.example.app_ban_sach.Fragment;
 
+import android.icu.text.DecimalFormat;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -72,7 +73,8 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
                     Sach sach = danhsach.getValue(Sach.class);
                     listSach.add(sach);
                     tong+=(sach.getGia() * sach.getSoLuong());
-                    tvTongTien.setText(String.valueOf(tong) +" VND");
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###");
+                    tvTongTien.setText(decimalFormat.format(tong) +" VND");
                 }
                 if(listSach.isEmpty()){
                     tvTongTien.setText("0 VND");
