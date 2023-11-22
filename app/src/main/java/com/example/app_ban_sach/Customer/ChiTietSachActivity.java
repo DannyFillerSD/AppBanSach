@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,7 +40,8 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
     FirebaseDatabase db;
     Button btnThemGH,btnMua;
     Sach curSach;
-    TextView tvTroVe,tvMota;
+    TextView tvMota;
+    ImageView tvTroVe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +52,8 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
         tvGiaSach = findViewById(R.id.tv_Gia);
         tvTheLoai = findViewById(R.id.tv_TheLoai);
         imageHinh = findViewById(R.id.image_hinh);
-        btnThemGH = findViewById(R.id.btn_ThemGioHang);
-        tvTroVe = findViewById(R.id.tvTrove);
-        btnMua = findViewById(R.id.btn_MuaNgay);
+        btnThemGH = findViewById(R.id.btn_Themgiohang);
+        tvTroVe = findViewById(R.id.imbackchitiet);
         tvMota = findViewById(R.id.tvMota);
 
         rcSachTuongTu = findViewById(R.id.rc_tuongTu);
@@ -68,18 +69,13 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
 
         tvTenSach.setText(tenSach);
         tvTheLoai.setText(theLoai);
-        tvGiaSach.setText(String.format("%.0f", gia) + " VNĐ");
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        tvGiaSach.setText(decimalFormat.format( gia) + " VNĐ");
         Picasso.get().load(hinh).into(imageHinh);
         tvMota.setText(mota);
         curSach = new Sach(tenSach,theLoai,gia,hinh,maSach,mota);
 
 
-        btnMua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
 
         // RecycleView Sách tương tự
@@ -117,7 +113,8 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
         tvTroVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent i = new Intent(ChiTietSachActivity.this,MainActivity.class);
+                startActivity(i);
             }
         });
 

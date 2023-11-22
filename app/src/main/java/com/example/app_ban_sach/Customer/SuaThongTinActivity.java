@@ -37,7 +37,7 @@ public class SuaThongTinActivity extends AppCompatActivity {
 
         TaiKhoan tk = DangNhapActivity.curUser;
 
-        tvTroVeSua =findViewById(R.id.tvBack);
+        tvTroVeSua =findViewById(R.id.img_TroVe);
         tvTroVeSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

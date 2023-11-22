@@ -1,5 +1,6 @@
 package com.example.app_ban_sach.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.icu.text.DecimalFormat;
 import android.provider.ContactsContract;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHolder> {
     private Context context;
     public ArrayList<Sach> gioHangList;
+    public int slCon;
     CallBack XoaCallBack;
     public GioHangAdapter(Context context, ArrayList<Sach> gioHangList, CallBack xoaCallBack) {
         this.context = context;
@@ -64,10 +66,35 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
         holder.btnCong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int cong = sach.getSoLuong() + 1;
-                sach.setSoLuong(cong);
                 FirebaseDatabase db = FirebaseDatabase.getInstance();
-                db.getReference("GioHang").child(DangNhapActivity.auth.getUid()).child("Sach").child(sach.getMaSach()).setValue(sach);
+                db.getReference("Sach").orderByChild("maSach").equalTo(sach.getMaSach()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot danhsach : snapshot.getChildren())
+                        {
+                            Sach sachSS = danhsach.getValue(Sach.class);
+                            slCon = sachSS.getSoLuong();
+                            System.out.println("SachSS " + sachSS.getSoLuong() + sachSS.getTenSach() + sachSS.getMaSach());
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                if(slCon <= sach.getSoLuong())
+                {
+                    Toast.makeText(context, "Số lượng sách trong cửa hàng không đủ" , Toast.LENGTH_SHORT).show();
+                }else{
+                    int cong = sach.getSoLuong() + 1;
+                    sach.setSoLuong(cong);
+                    db.getReference("GioHang").child(DangNhapActivity.auth.getUid()).child("Sach").child(sach.getMaSach()).setValue(sach);
+                    System.out.println("SoLuongmua " + sach.getSoLuong());
+                }
+
             }
         });
 

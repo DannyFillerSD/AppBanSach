@@ -67,14 +67,6 @@ public class TrangChuFragment extends Fragment implements  SachAdapter.CallBack 
 
         imSearch = v.findViewById(R.id.img_Search);
 
-        imSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), TimKiemActivity.class);
-                startActivity(i);
-            }
-        });
-
 
         listSach = new ArrayList<>();
 
@@ -99,6 +91,13 @@ public class TrangChuFragment extends Fragment implements  SachAdapter.CallBack 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        imSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), TimKiemActivity.class);
+                startActivity(i);
             }
         });
 

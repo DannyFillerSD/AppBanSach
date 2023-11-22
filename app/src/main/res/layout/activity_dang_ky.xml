@@ -7,13 +7,37 @@
     tools:context=".UI.DangKyActivity">
 
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:textColor="#009966"
+        android:textSize="28dp"
+        android:text="ĐĂNG KÝ"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
     <EditText
         android:id="@+id/edEmailDK"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginTop="284dp"
-        android:background="@drawable/edittext"
+        android:background="@drawable/bogoc_edittext"
         android:hint="Email"
+        android:layout_marginHorizontal="16dp"
         android:paddingLeft="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
@@ -22,11 +46,12 @@
 
     <EditText
         android:id="@+id/edMatKhauDK"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/edittext"
+        android:background="@drawable/bogoc_edittext"
         android:hint="Mật khẩu"
+        android:layout_marginHorizontal="16dp"
         android:paddingLeft="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,11 +59,12 @@
 
     <EditText
         android:id="@+id/edNhapLaiMK"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/edittext"
+        android:background="@drawable/bogoc_edittext"
         android:hint="Nhập lại mật khẩu"
+        android:layout_marginHorizontal="16dp"
         android:paddingLeft="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,11 +72,12 @@
 
     <EditText
         android:id="@+id/edTenNguoiDung"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/edittext"
+        android:background="@drawable/bogoc_edittext"
         android:hint="Tên người dùng"
+        android:layout_marginHorizontal="16dp"
         android:paddingLeft="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
@@ -62,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edTenNguoiDung" />
@@ -82,10 +109,12 @@
 
     <Button
         android:id="@+id/btnDangKy"
-        android:layout_width="376dp"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:backgroundTint="#5DB075"
+        android:textSize="24dp"
         android:text="Đăng Ký"
+        android:layout_marginHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
@@ -98,6 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:clickable="true"
+        android:textSize="18dp"
         android:text="Đã có tài khoản"
         android:textStyle="bold"
         android:textColor="#5DB075"

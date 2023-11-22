@@ -31,6 +31,9 @@
         android:theme="@style/Theme.App_ban_sach"
         tools:targetApi="31">
         <activity
+            android:name=".Customer.ThanhToanActivity"
+            android:exported="false" />
+        <activity
             android:name=".Customer.TimKiemActivity"
             android:exported="false" />
         <activity
