@@ -8,6 +8,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -54,6 +55,9 @@ public class ThemSachActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_sach);
+
+
+
         edTen = findViewById(R.id.edTenSachThem);
         edGia = findViewById(R.id.edGiaSachThemSach);
         edSoLuong = findViewById(R.id.edSoLuongThem);
@@ -61,6 +65,8 @@ public class ThemSachActivity extends AppCompatActivity {
         btnThemSach = findViewById(R.id.btnAdd);
         tvTroVe = findViewById(R.id.tvTroVeThemSach);
         imThemSach = findViewById(R.id.imThemSach);
+
+
 
         String phanLoai[] = {"Văn Học", "Kinh Tế", "Thiếu Nhi", "Giáo Khoa", "Ngoại Ngữ"};
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, phanLoai);
@@ -90,7 +96,7 @@ public class ThemSachActivity extends AppCompatActivity {
                 ref.putFile(ImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(ThemSachActivity.this, "upload hinh thanh cong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ThemSachActivity.this, "Thêm Sách Thành Công", Toast.LENGTH_SHORT).show();
                         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
@@ -103,8 +109,8 @@ public class ThemSachActivity extends AppCompatActivity {
                                 sach.setSoLuong(Integer.parseInt(sl));
                                 sach.setHinhAnh(uri.toString());
                                 sach.setTheLoai(spTheLoai.getSelectedItem().toString());
-                                Toast.makeText(ThemSachActivity.this,spTheLoai.getSelectedItem().toString() , Toast.LENGTH_SHORT).show();
                                 TaoMaSach(sach.getTheLoai(),sach);
+                                finish();
                             }
                         });
 
@@ -144,12 +150,7 @@ public class ThemSachActivity extends AppCompatActivity {
                 }
 
                 sach.setMaSach(masach);
-                db.getReference("Sach").child(masach).setValue(sach).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(ThemSachActivity.this, "Luu7 sach1 thanh cong", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                db.getReference("Sach").child(masach).setValue(sach);
             }
 
             @Override
@@ -166,7 +167,7 @@ public class ThemSachActivity extends AppCompatActivity {
                 .withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        Intent i = new Intent();
+                        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         i.setType("image/*");
                         i.setAction(Intent.ACTION_GET_CONTENT);
                         startActivityForResult(i,101);

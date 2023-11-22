@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.app_ban_sach.R;
@@ -13,6 +14,7 @@ import com.example.app_ban_sach.UI.DangNhapActivity;
 public class TrangChuAdminActivity extends AppCompatActivity {
 
     TextView tvThemSach,tvSach,tvTroVe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,7 @@ public class TrangChuAdminActivity extends AppCompatActivity {
         tvThemSach = findViewById(R.id.tvThemSach);
         tvTroVe = findViewById(R.id.tvTroVeThemSachAdmin);
         tvSach = findViewById(R.id.tvSach);
+
 
         tvTroVe.setOnClickListener(new View.OnClickListener() {
             @Override

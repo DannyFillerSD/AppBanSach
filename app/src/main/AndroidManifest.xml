@@ -31,14 +31,20 @@
         android:theme="@style/Theme.App_ban_sach"
         tools:targetApi="31">
         <activity
-            android:name=".Admin.ChinhSuaSachActivity"
+            android:name=".Customer.TimKiemActivity"
             android:exported="false" />
+        <activity
+            android:name=".Admin.ChinhSuaSachActivity"
+            android:exported="false"
+            android:parentActivityName=".Admin.SachAdminActivity" />
         <activity
             android:name=".Admin.SachAdminActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Admin.TrangChuAdminActivity" />
         <activity
             android:name=".Admin.ThemSachActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Admin.TrangChuAdminActivity" />
         <activity
             android:name=".Admin.TrangChuAdminActivity"
             android:exported="false"

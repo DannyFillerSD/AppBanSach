@@ -1,5 +1,6 @@
 package com.example.app_ban_sach.Fragment;
 
+import android.app.AlertDialog;
 import android.icu.text.DecimalFormat;
 import android.media.Image;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -114,7 +116,7 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
                 tvTongTien.setText("0 VND");
                 gioHangAdapter.notifyDataSetChanged();
 
-                Toast.makeText(getContext(), "Đã thanh toán thành công", Toast.LENGTH_SHORT).show();
+                showAlertDialogButtonClicked(v);
             }
         });
 
@@ -126,8 +128,41 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
             imTrong.setVisibility(v.VISIBLE);
             tvTrong.setVisibility(v.VISIBLE);
         }
+
+
+
+//        btnMua.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showAlertDialogButtonClicked(v);
+//            }
+//        });
         return v;
     }
+
+    public void showAlertDialogButtonClicked(View view) {
+        // Create an alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.thanh_toan_tc, null);
+        builder.setView(customLayout);
+
+        // add a button
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            // send data from the AlertDialog to the Activity
+//            EditText editText = customLayout.findViewById(R.id.editText);
+//            sendDialogDataToActivity(editText.getText().toString());
+        });
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void sendDialogDataToActivity(String data) {
+        Toast.makeText(getContext(), data, Toast.LENGTH_SHORT).show();
+    }
+
 
     @Override
     public void onClick(int position, Sach sach) {

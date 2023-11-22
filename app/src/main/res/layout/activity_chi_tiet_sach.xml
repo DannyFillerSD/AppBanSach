@@ -163,12 +163,12 @@
                     android:id="@+id/btn_MuaNgay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:backgroundTint="#5DB075"
                     android:background="@drawable/bg_button"
-                    android:paddingLeft="35dp"
-                    android:paddingRight="35dp"
-                    android:text="Mua ngay"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="Mua Ngay"
+                    android:backgroundTint="#5DB075"
                     android:textColor="@color/white"
                     android:textSize="16dp" />
 
@@ -184,15 +184,12 @@
                 android:text="Mô tả" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/tvMota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:text="“nỗi buồn không rõ hình thù ta cho nó dáng, ta thu vào lòng ta ôm mà chẳng đề phòng một ngày nó lớn chất chồng tâm can”
-“kẻ sống muốn đời cạn người chết muốn hồi sinh trần gian bi hài nhỉ? ta còn muốn bỏ mình?”
-Đám trẻ ở đại dương đen là lời độc thoại và đối thoại của những đứa trẻ ở đại dương đen, nơi từng lớp sóng của nỗi buồn và tuyệt vọng không ngừng cuộn trào, lúc âm ỉ, khi dữ dội. Những đứa trẻ ấy phải vật lộn trong những góc tối tâm lý, với sự u uất đè nén từ tổn thương khi không được sinh ra trong một gia đình toàn vẹn, ấm êm, khi phải mang trên đôi vai non dại những gánh nặng không tưởng.
-Song song đó cũng là quá trình tự chữa lành vô cùng khó khăn của đám trẻ, cố gắng vươn mình ra khỏi đại dương đen, tìm cho mình một ánh sáng. Và chính những sự nỗ lực xoa dịu chính mình đó đã hóa thành những câu từ trong cuốn sách này, bất kể đau đớn thế nào." />
+                android:text="Mô tả" />
 
             <TextView
                 android:id="@+id/textView9"

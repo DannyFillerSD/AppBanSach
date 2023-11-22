@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SuaThongTinActivity extends AppCompatActivity {
 
     EditText edTenTaiKhoan,edSoDienThoai,edDiaChi;
-    TextView tvTroVeSua;
+    ImageView tvTroVeSua;
     Button btnCapNhat;
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     @Override
@@ -31,11 +32,12 @@ public class SuaThongTinActivity extends AppCompatActivity {
         edTenTaiKhoan = findViewById(R.id.edTen);
         edSoDienThoai = findViewById(R.id.edSDT);
         edDiaChi = findViewById(R.id.edDiaChi);
-        tvTroVeSua = findViewById(R.id.tvTroVeSua);
+//        tvTroVeSua = findViewById(R.id.tvTroVeSua);
         btnCapNhat = findViewById(R.id.btnCapNhat);
 
         TaiKhoan tk = DangNhapActivity.curUser;
 
+        tvTroVeSua =findViewById(R.id.tvBack);
         tvTroVeSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

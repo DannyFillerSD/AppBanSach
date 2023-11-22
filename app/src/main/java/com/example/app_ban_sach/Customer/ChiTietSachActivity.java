@@ -39,7 +39,7 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
     FirebaseDatabase db;
     Button btnThemGH,btnMua;
     Sach curSach;
-    TextView tvTroVe;
+    TextView tvTroVe,tvMota;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +53,7 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
         btnThemGH = findViewById(R.id.btn_ThemGioHang);
         tvTroVe = findViewById(R.id.tvTrove);
         btnMua = findViewById(R.id.btn_MuaNgay);
+        tvMota = findViewById(R.id.tvMota);
 
         rcSachTuongTu = findViewById(R.id.rc_tuongTu);
         listSach = new ArrayList<>();
@@ -63,12 +64,15 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
         double gia = i.getDoubleExtra("gia",0);
         String hinh = i.getStringExtra("hinhAnh");
         String maSach = i.getStringExtra("maSach");
+        String mota = i.getStringExtra("moTa");
 
         tvTenSach.setText(tenSach);
         tvTheLoai.setText(theLoai);
         tvGiaSach.setText(String.format("%.0f", gia) + " VNĐ");
         Picasso.get().load(hinh).into(imageHinh);
-        curSach = new Sach(tenSach,theLoai,gia,hinh,maSach);
+        tvMota.setText(mota);
+        curSach = new Sach(tenSach,theLoai,gia,hinh,maSach,mota);
+
 
         btnMua.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,5 +131,10 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
         i.putExtra("theLoai",sach.getTheLoai());
         i.putExtra("gia",sach.getGia());
         startActivity(i);
+    }
+
+    @Override
+    public void setFilteredList(ArrayList<Sach> filteredList) {
+
     }
 }

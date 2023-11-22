@@ -21,7 +21,7 @@ import java.util.List;
 public class SachAdapter extends RecyclerView.Adapter<SachAdapter.MyViewHolder> {
 
     private Context context;
-    public ArrayList<Sach> sachList;
+    public static ArrayList<Sach> sachList;
     CallBack sachCall;
 
     public SachAdapter(Context context, ArrayList<Sach> SachList,CallBack SachCall) {
@@ -67,7 +67,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.MyViewHolder> 
     }
     public interface CallBack{
         void onClick(int position, Sach sach);
-//        void setFilteredList(ArrayList<Book> filteredList);
+        void setFilteredList(ArrayList<Sach> filteredList);
     }
 }
 

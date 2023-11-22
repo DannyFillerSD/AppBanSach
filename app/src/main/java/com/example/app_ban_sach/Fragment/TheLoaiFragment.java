@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.app_ban_sach.Adapter.SachAdapter;
 import com.example.app_ban_sach.Customer.ChiTietSachActivity;
@@ -38,6 +39,7 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
     private FirebaseDatabase db;
     private String theLoai = "Văn Học";
     TabLayout tabLayout;
+    ViewPager viewPager;
 
 
     @Override
@@ -45,6 +47,11 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_the_loai, container, false);
         getActivity().setTitle("Danh Mục");
+
+
+
+
+
 
         rcTheLoai = v.findViewById(R.id.rcTheLoai);
         db = FirebaseDatabase.getInstance();
@@ -56,6 +63,25 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
 
         sachAdapter = new SachAdapter(getContext(),listSach,this);
         rcTheLoai.setAdapter(sachAdapter);
+
+        db.getReference("Sach").orderByChild("theLoai").equalTo("Văn Học").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listSach.clear();
+                for(DataSnapshot danhsach : snapshot.getChildren())
+                {
+                    Sach sach = danhsach.getValue(Sach.class);
+                    listSach.add(sach);
+                }
+                sachAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         //tab item
         tabLayout = v.findViewById(R.id.tabLayout);
@@ -147,5 +173,10 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
         i.putExtra("maSach",sach.getMaSach());
 
         startActivity(i);
+    }
+
+    @Override
+    public void setFilteredList(ArrayList<Sach> filteredList) {
+
     }
 }

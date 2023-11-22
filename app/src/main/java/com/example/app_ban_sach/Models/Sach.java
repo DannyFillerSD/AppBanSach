@@ -7,7 +7,18 @@ public class Sach {
     private String hinhAnh;
     private String maSach;
     private int soLuong = 1;
+    private String moTa ;
     public Sach (){}
+
+    public Sach(String tenSach, String theLoai, double gia, String hinhAnh, String maSach, int soLuong, String moTa) {
+        this.tenSach = tenSach;
+        this.theLoai = theLoai;
+        this.gia = gia;
+        this.hinhAnh = hinhAnh;
+        this.maSach = maSach;
+        this.soLuong = soLuong;
+        this.moTa = moTa;
+    }
 
     public Sach(String tenSach, String theLoai, double gia, String hinhAnh, String maSach, int soLuong) {
         this.tenSach = tenSach;
@@ -18,12 +29,13 @@ public class Sach {
         this.soLuong = soLuong;
     }
 
-    public Sach(String tenSach, String theLoai, double gia, String hinhAnh, String maSach) {
+    public Sach(String tenSach, String theLoai, double gia, String hinhAnh, String maSach,String moTa) {
         this.tenSach = tenSach;
         this.theLoai = theLoai;
         this.gia = gia;
         this.hinhAnh = hinhAnh;
         this.maSach = maSach;
+        this.moTa = moTa;
     }
 
     public String getTenSach() {
@@ -72,5 +84,13 @@ public class Sach {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
+    }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
     }
 }

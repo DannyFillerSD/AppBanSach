@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -21,6 +23,7 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 
 import com.example.app_ban_sach.Adapter.SachAdapter;
 import com.example.app_ban_sach.Customer.ChiTietSachActivity;
+import com.example.app_ban_sach.Customer.TimKiemActivity;
 import com.example.app_ban_sach.MainActivity;
 import com.example.app_ban_sach.Models.Sach;
 import com.example.app_ban_sach.R;
@@ -48,6 +51,8 @@ public class TrangChuFragment extends Fragment implements  SachAdapter.CallBack 
 
     FirebaseDatabase db;
 
+    ImageView imSearch;
+
     //sách
     private RecyclerView rvSach;
     private SachAdapter sachAdapter;
@@ -60,12 +65,23 @@ public class TrangChuFragment extends Fragment implements  SachAdapter.CallBack 
         getActivity().setTitle("Trang chủ");
         db = FirebaseDatabase.getInstance();
 
+        imSearch = v.findViewById(R.id.img_Search);
+
+        imSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), TimKiemActivity.class);
+                startActivity(i);
+            }
+        });
+
+
         listSach = new ArrayList<>();
 
         //Adapter sách
         rvSach = v.findViewById(R.id.rvSachMoi);
-        LinearLayoutManager linearLayout = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
-        rvSach.setLayoutManager(linearLayout);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
+        rvSach.setLayoutManager(gridLayoutManager);
 
         sachAdapter = new SachAdapter(getContext(),listSach,this);
         rvSach.setAdapter(sachAdapter);
@@ -201,8 +217,13 @@ public class TrangChuFragment extends Fragment implements  SachAdapter.CallBack 
         i.putExtra("theLoai",sach.getTheLoai());
         i.putExtra("gia",sach.getGia());
         i.putExtra("maSach",sach.getMaSach());
-
+        i.putExtra("moTa",sach.getMoTa());
         startActivity(i);
+
+    }
+
+    @Override
+    public void setFilteredList(ArrayList<Sach> filteredList) {
 
     }
 }

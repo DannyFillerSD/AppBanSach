@@ -18,26 +18,30 @@
 
     <EditText
         android:id="@+id/edEmail"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="51dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="340dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/edittext"
         android:hint="Email"
         android:paddingLeft="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edMatKhau"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="51dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:paddingLeft="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/edittext"
-        android:inputType="textPassword"
         android:hint="Mật Khẩu"
+        android:inputType="textPassword"
+        android:paddingLeft="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edEmail" />
@@ -111,12 +115,14 @@
 
     <Button
         android:id="@+id/btnDangNhap"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="52dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="132dp"
-        android:text="Đăng nhập"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="#5DB075"
         android:elevation="10dp"
+        android:text="Đăng nhập"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
