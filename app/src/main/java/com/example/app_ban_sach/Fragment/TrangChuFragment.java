@@ -3,19 +3,14 @@ package com.example.app_ban_sach.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.CompositePageTransformer;
@@ -24,8 +19,8 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import com.example.app_ban_sach.Adapter.SachAdapter;
 import com.example.app_ban_sach.Customer.ChiTietSachActivity;
 import com.example.app_ban_sach.Customer.TimKiemActivity;
-import com.example.app_ban_sach.MainActivity;
 import com.example.app_ban_sach.Models.Sach;
+import com.example.app_ban_sach.Pattern.SingletonPattern.Singleton;
 import com.example.app_ban_sach.R;
 import com.example.app_ban_sach.Slides.Banner;
 import com.example.app_ban_sach.Slides.Banner_Adapter;
@@ -33,7 +28,6 @@ import com.example.app_ban_sach.Slides.Top3;
 import com.example.app_ban_sach.Slides.Top3_Adapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -49,21 +43,20 @@ public class TrangChuFragment extends Fragment implements  SachAdapter.CallBack 
     private ArrayList<Sach> listSach ;
     private Handler mHandler = new Handler();
 
-    FirebaseDatabase db;
-
-    ImageView imSearch;
+//    ImageView imSearch;
+    TextView imSearch;
 
     //sách
     private RecyclerView rvSach;
     private SachAdapter sachAdapter;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_trang_chu, container, false);
+        //Singelton
+//        Singleton.GetFirebaseDatabase();
 
         getActivity().setTitle("Trang chủ");
-        db = FirebaseDatabase.getInstance();
 
         imSearch = v.findViewById(R.id.img_Search);
 
@@ -77,7 +70,7 @@ public class TrangChuFragment extends Fragment implements  SachAdapter.CallBack 
 
         sachAdapter = new SachAdapter(getContext(),listSach,this);
         rvSach.setAdapter(sachAdapter);
-        db.getReference("Sach").addValueEventListener(new ValueEventListener() {
+        Singleton.db.getReference("Sach").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot danhsach : snapshot.getChildren())
@@ -218,7 +211,6 @@ public class TrangChuFragment extends Fragment implements  SachAdapter.CallBack 
         i.putExtra("maSach",sach.getMaSach());
         i.putExtra("moTa",sach.getMoTa());
         startActivity(i);
-
     }
 
     @Override

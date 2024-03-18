@@ -24,7 +24,6 @@ public class TrangChuAdminActivity extends AppCompatActivity {
         tvTroVe = findViewById(R.id.tvTroVeThemSachAdmin);
         tvSach = findViewById(R.id.tvSach);
 
-
         tvTroVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

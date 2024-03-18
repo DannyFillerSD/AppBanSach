@@ -4,23 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ImageView;
 
 import com.example.app_ban_sach.Adapter.SachAdapter;
 import com.example.app_ban_sach.MainActivity;
 import com.example.app_ban_sach.Models.Sach;
+import com.example.app_ban_sach.Pattern.SingletonPattern.Singleton;
 import com.example.app_ban_sach.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -28,7 +25,6 @@ import java.util.ArrayList;
 
 public class TimKiemActivity extends AppCompatActivity implements SachAdapter.CallBack {
     private SearchView searchView;
-    FirebaseDatabase db = FirebaseDatabase.getInstance();
     FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
     ArrayList<Sach> listSach = new ArrayList<>();
     private RecyclerView rvSach;
@@ -40,6 +36,9 @@ public class TimKiemActivity extends AppCompatActivity implements SachAdapter.Ca
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tim_kiem);
 
+        //Singleton
+//        Singleton.GetFirebaseDatabase();
+
         back = findViewById(R.id.imbacktimkiem);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +48,6 @@ public class TimKiemActivity extends AppCompatActivity implements SachAdapter.Ca
             }
         });
 
-        db = FirebaseDatabase.getInstance();
         listSach = new ArrayList<>();
 
         //Adapter sách
@@ -59,7 +57,7 @@ public class TimKiemActivity extends AppCompatActivity implements SachAdapter.Ca
 
         sachAdapter = new SachAdapter(TimKiemActivity.this,listSach,this);
         rvSach.setAdapter(sachAdapter);
-        db.getReference("Sach").addValueEventListener(new ValueEventListener() {
+        Singleton.db.getReference("Sach").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot danhsach : snapshot.getChildren())

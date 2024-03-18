@@ -1,15 +1,12 @@
 package com.example.app_ban_sach.Fragment;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.icu.text.DecimalFormat;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,25 +18,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_ban_sach.Adapter.GioHangAdapter;
 import com.example.app_ban_sach.Customer.ThanhToanActivity;
-import com.example.app_ban_sach.Models.HoaDon;
 import com.example.app_ban_sach.Models.Sach;
+import com.example.app_ban_sach.Pattern.SingletonPattern.Singleton;
 import com.example.app_ban_sach.R;
 import com.example.app_ban_sach.UI.DangNhapActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack{
     private ArrayList<Sach> listSach ;
     private RecyclerView rcGioHang;
     private GioHangAdapter gioHangAdapter;
-    FirebaseDatabase db;
     TextView tvTongTien,tvTrong;
     ImageView imTrong;
     Button btnMua;
@@ -59,7 +52,8 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
 
         getActivity().setTitle("Trang chủ");
         listSach = new ArrayList<>();
-        db = FirebaseDatabase.getInstance();
+        //SingleTon
+//        Singleton.GetFirebaseDatabase();
         //Adapter sách
         rcGioHang = v.findViewById(R.id.rcGioHang);
         LinearLayoutManager linearLayout = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
@@ -67,7 +61,7 @@ public class GioHangFragment extends Fragment implements GioHangAdapter.CallBack
 
         gioHangAdapter = new GioHangAdapter(getContext(),listSach,this);
         rcGioHang.setAdapter(gioHangAdapter);
-        db.getReference("GioHang").child(idUSer).child("Sach").addValueEventListener(new ValueEventListener() {
+        Singleton.db.getReference("GioHang").child(idUSer).child("Sach").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listSach.clear();

@@ -1,17 +1,14 @@
 package com.example.app_ban_sach.Admin;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.icu.text.DecimalFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,16 +17,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.app_ban_sach.Models.Sach;
-import com.example.app_ban_sach.Models.TaiKhoan;
+import com.example.app_ban_sach.Pattern.SingletonPattern.Singleton;
 import com.example.app_ban_sach.R;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.karumi.dexter.Dexter;
@@ -47,12 +37,17 @@ public class ChinhSuaSachActivity extends AppCompatActivity {
     Button btnXoa,btnCapNhat;
     ImageView imSach;
     Uri ImageUri;
-    FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
     public int a = 0;
-    FirebaseDatabase db = FirebaseDatabase.getInstance();
+//    FirebaseDatabase db = FirebaseDatabase.getInstance();
+//    FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        Singleton.GetFirebaseDatabase();
+//        Singleton.GetFirebaseStorage();
+
         setContentView(R.layout.activity_chinh_sua_sach);
         edTen = findViewById(R.id.edSuaTenSach);
         edGia = findViewById(R.id.edSuaGia);
@@ -129,7 +124,7 @@ public class ChinhSuaSachActivity extends AppCompatActivity {
 //                });
 
 
-                db.getReference().child("Sach").child(maSach).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                Singleton.db.getReference().child("Sach").child(maSach).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(ChinhSuaSachActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
@@ -151,7 +146,7 @@ public class ChinhSuaSachActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final StorageReference ref = firebaseStorage.getReference().child("sach")
+                final StorageReference ref = Singleton.firebaseStorage.getReference().child("sach")
                         .child(System.currentTimeMillis()+"");
                 ref.putFile(ImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -174,7 +169,7 @@ public class ChinhSuaSachActivity extends AppCompatActivity {
                                 sach.setTheLoai(theLoai);
 
                                 Toast.makeText(ChinhSuaSachActivity.this, "Cập Nhật Thành Công", Toast.LENGTH_SHORT).show();
-                                db.getReference("Sach").child(maSach).setValue(sach).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                Singleton.db.getReference("Sach").child(maSach).setValue(sach).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         Toast.makeText(ChinhSuaSachActivity.this, "Cập Nhật Thành Công", Toast.LENGTH_SHORT).show();

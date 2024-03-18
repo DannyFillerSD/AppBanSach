@@ -7,24 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.app_ban_sach.Customer.SuaThongTinActivity;
-import com.example.app_ban_sach.Models.Sach;
-import com.example.app_ban_sach.Models.TaiKhoan;
 import com.example.app_ban_sach.R;
 import com.example.app_ban_sach.UI.DangNhapActivity;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.io.Console;
 
 public class TaiKhoanFragment extends Fragment {
     TextView tvDangXuat,tvLienHe,tvTenCaNhan,tvIdCaNhan;
-    FirebaseDatabase db;
     TextView tvSuaThongTin;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,8 +29,6 @@ public class TaiKhoanFragment extends Fragment {
         tvTenCaNhan = v.findViewById(R.id.tvTenCaNhan);
         tvIdCaNhan = v.findViewById(R.id.tvIdCaNhan);
 
-//        Sach sach = new Sach("Ngoại Ngữ","Giáo Dục",20000);
-        db = FirebaseDatabase.getInstance();
         tvIdCaNhan.setText(DangNhapActivity.auth.getUid());
         tvTenCaNhan.setText(DangNhapActivity.curUser.getTenNguoiDung());
 

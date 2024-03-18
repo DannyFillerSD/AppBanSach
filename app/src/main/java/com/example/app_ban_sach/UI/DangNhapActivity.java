@@ -15,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.app_ban_sach.Admin.TrangChuAdminActivity;
 import com.example.app_ban_sach.MainActivity;
-import com.example.app_ban_sach.Models.Sach;
 import com.example.app_ban_sach.Models.TaiKhoan;
+import com.example.app_ban_sach.Pattern.SingletonPattern.Singleton;
 import com.example.app_ban_sach.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -24,7 +24,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -33,7 +32,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -45,7 +43,6 @@ public class DangNhapActivity extends AppCompatActivity {
     Button btnDangNhap;
     public static FirebaseAuth auth;
     public static TaiKhoan curUser;
-    FirebaseDatabase db = FirebaseDatabase.getInstance();
     GoogleSignInClient googleSignInClient;
     String id;
 
@@ -59,6 +56,8 @@ public class DangNhapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_nhap);
+
+//        Singleton.GetFirebaseDatabase();
 
         tvDangKy = findViewById(R.id.tvDangKy);
         btnDangNhap = findViewById(R.id.btnDangNhap);
@@ -94,7 +93,7 @@ public class DangNhapActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful())
                                     {
-                                        db.getReference("TaiKhoan").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+                                        Singleton.db.getReference("TaiKhoan").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 

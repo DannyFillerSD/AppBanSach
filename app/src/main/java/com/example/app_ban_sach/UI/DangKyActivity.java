@@ -5,26 +5,22 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.app_ban_sach.Models.TaiKhoan;
+import com.example.app_ban_sach.Pattern.SingletonPattern.Singleton;
 import com.example.app_ban_sach.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
 
 public class DangKyActivity extends AppCompatActivity {
     EditText edEmail,edMatKhau,edNhapLaiMK,edTenTaiKhoan;
     Button btnDangKy;
-    FirebaseDatabase db;
     FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +28,7 @@ public class DangKyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dang_ky);
 
         auth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance();
+        //Singleton
 
         edEmail  = findViewById(R.id.edEmailDK);
         edMatKhau = findViewById(R.id.edMatKhauDK);
@@ -70,7 +66,7 @@ public class DangKyActivity extends AppCompatActivity {
                                             newTK.setSoDienThoai("");
                                             newTK.setVaiTro(1);
 
-                                            db.getReference("TaiKhoan").child(auth.getUid()).setValue(newTK);
+                                            Singleton.db.getReference("TaiKhoan").child(auth.getUid()).setValue(newTK);
 
                                             Toast.makeText(DangKyActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                                             finish();
