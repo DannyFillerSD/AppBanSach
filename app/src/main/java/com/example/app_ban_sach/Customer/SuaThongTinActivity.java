@@ -6,28 +6,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.app_ban_sach.MainActivity;
 import com.example.app_ban_sach.Models.TaiKhoan;
+import com.example.app_ban_sach.Pattern.SingletonPattern.Singleton;
 import com.example.app_ban_sach.R;
-import com.example.app_ban_sach.UI.DangKyActivity;
 import com.example.app_ban_sach.UI.DangNhapActivity;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class SuaThongTinActivity extends AppCompatActivity {
 
     EditText edTenTaiKhoan,edSoDienThoai,edDiaChi;
     ImageView tvTroVeSua;
     Button btnCapNhat;
-    FirebaseDatabase db = FirebaseDatabase.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sua_thong_tin);
+        //Singleton
+//        Singleton.GetFirebaseDatabase();
 
         edTenTaiKhoan = findViewById(R.id.edTen);
         edSoDienThoai = findViewById(R.id.edSDT);
@@ -59,7 +59,7 @@ public class SuaThongTinActivity extends AppCompatActivity {
                 tk.setTenNguoiDung(ten);
                 tk.setDiaChi(diaChi);
                 tk.setSoDienThoai(soDT);
-                db.getReference("TaiKhoan").child(DangNhapActivity.auth.getUid()).setValue(tk);
+                Singleton.db.getReference("TaiKhoan").child(DangNhapActivity.auth.getUid()).setValue(tk);
                 Toast.makeText(SuaThongTinActivity.this, "Cập nhật thành cồng", Toast.LENGTH_SHORT).show();
                 DangNhapActivity.curUser = tk;
                 Intent i = new Intent(SuaThongTinActivity.this, MainActivity.class);

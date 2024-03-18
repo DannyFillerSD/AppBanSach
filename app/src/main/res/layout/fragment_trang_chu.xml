@@ -7,30 +7,52 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.TrangChuFragment">
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:elevation="10dp">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="20dp">
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/logo"
-                    android:layout_marginLeft="16dp"/>
+        <!--                <ImageView-->
+        <!--                    android:id="@+id/img_Search"-->
+        <!--                    android:layout_width="30dp"-->
+        <!--                    android:layout_height="30dp"-->
+        <!--                    android:layout_marginLeft="250dp"-->
+        <!--                    android:clickable="true"-->
+        <!--                    android:src="@drawable/icon_search" />-->
 
-                <ImageView
-                    android:id="@+id/img_Search"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="250dp"
-                    android:clickable="true"
-                    android:src="@drawable/icon_search" />
-            </TableRow>
-        </TableLayout>
+        <ImageView
+            android:layout_width="54dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.454" />
+
+        <TextView
+            android:id="@+id/img_Search"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginEnd="36dp"
+            android:clickable="true"
+            android:padding="@dimen/cardview_default_elevation"
+            android:src="@drawable/icon_search"
+            android:text="Tìm Kiếm"
+            android:textColor="@color/lightblack"
+
+            android:textSize="16sp"
+            android:textStyle="bold"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.476" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
         <ScrollView
             android:layout_width="match_parent"

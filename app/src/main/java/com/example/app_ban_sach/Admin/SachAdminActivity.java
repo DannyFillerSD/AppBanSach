@@ -3,7 +3,6 @@ package com.example.app_ban_sach.Admin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -11,21 +10,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.app_ban_sach.Adapter.SachAdapter;
 import com.example.app_ban_sach.Adapter.SachAdminAdapter;
-import com.example.app_ban_sach.Customer.ChiTietSachActivity;
 import com.example.app_ban_sach.Models.Sach;
+import com.example.app_ban_sach.Pattern.SingletonPattern.Singleton;
 import com.example.app_ban_sach.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class SachAdminActivity extends AppCompatActivity implements SachAdminAdapter.CallBack {
 
-    FirebaseDatabase db;
+//    FirebaseDatabase db;
 
     //sách
     private RecyclerView rvSach;
@@ -36,7 +33,9 @@ public class SachAdminActivity extends AppCompatActivity implements SachAdminAda
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sach_admin);
-        db = FirebaseDatabase.getInstance();
+
+        //Singleton
+//        Singleton.GetFirebaseDatabase();
 
         imback = findViewById(R.id.imTroVeThemSachAdmin);
         imback.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +56,7 @@ public class SachAdminActivity extends AppCompatActivity implements SachAdminAda
 
         sachAdminAdapter = new SachAdminAdapter(SachAdminActivity.this,listSach,this);
         rvSach.setAdapter(sachAdminAdapter);
-        db.getReference("Sach").addValueEventListener(new ValueEventListener() {
+        Singleton.db.getReference("Sach").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot danhsach : snapshot.getChildren())

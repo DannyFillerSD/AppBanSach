@@ -5,22 +5,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.app_ban_sach.Adapter.SachAdapter;
 import com.example.app_ban_sach.Customer.ChiTietSachActivity;
 import com.example.app_ban_sach.Models.Sach;
+import com.example.app_ban_sach.Pattern.SingletonPattern.Singleton;
 import com.example.app_ban_sach.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.nio.file.FileStore;
 import java.util.ArrayList;
 
 public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
@@ -36,7 +30,6 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
     private SachAdapter sachAdapter;
     private ArrayList<Sach> listSach;
     private RecyclerView rcTheLoai;
-    private FirebaseDatabase db;
     private String theLoai = "Văn Học";
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -48,13 +41,9 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
         View v = inflater.inflate(R.layout.fragment_the_loai, container, false);
         getActivity().setTitle("Danh Mục");
 
-
-
-
-
-
+        //Singleton
+        Singleton.db = FirebaseDatabase.getInstance();
         rcTheLoai = v.findViewById(R.id.rcTheLoai);
-        db = FirebaseDatabase.getInstance();
         listSach = new ArrayList<>();
 
         //Adapter sách
@@ -64,7 +53,7 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
         sachAdapter = new SachAdapter(getContext(),listSach,this);
         rcTheLoai.setAdapter(sachAdapter);
 
-        db.getReference("Sach").orderByChild("theLoai").equalTo("Văn Học").addValueEventListener(new ValueEventListener() {
+        Singleton.db.getReference("Sach").orderByChild("theLoai").equalTo("Văn Học").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listSach.clear();
@@ -144,7 +133,7 @@ public class TheLoaiFragment extends Fragment implements SachAdapter.CallBack {
     }
 
     public void getListSach(String getTheLoai){
-        db.getReference("Sach").orderByChild("theLoai").equalTo(getTheLoai).addValueEventListener(new ValueEventListener() {
+        Singleton.db.getReference("Sach").orderByChild("theLoai").equalTo(getTheLoai).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listSach.clear();

@@ -19,14 +19,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.app_ban_sach.Models.Sach;
+import com.example.app_ban_sach.Pattern.FactoryPattern.Factory;
+import com.example.app_ban_sach.Pattern.FactoryPattern.ISach;
+import com.example.app_ban_sach.Pattern.FactoryPattern.LoaiSach;
+import com.example.app_ban_sach.Pattern.SingletonPattern.Singleton;
 import com.example.app_ban_sach.R;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.karumi.dexter.Dexter;
@@ -46,16 +47,19 @@ public class ThemSachActivity extends AppCompatActivity {
     TextView tvTroVe;
     Uri ImageUri;
     ImageView imThemSach;
-    FirebaseDatabase db = FirebaseDatabase.getInstance();
-    FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-    ArrayList<Sach> listSach = new ArrayList<>();
-    private String masach;
+//    FirebaseDatabase db = FirebaseDatabase.getInstance();
+//    FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+static ArrayList<Sach> listSach = new ArrayList<>();
+    private static String masach;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_sach);
 
+        //Singleton
+//        Singleton.GetFirebaseStorage();
+//        Singleton.GetFirebaseDatabase();
 
 
         edTen = findViewById(R.id.edTenSachThem);
@@ -91,7 +95,7 @@ public class ThemSachActivity extends AppCompatActivity {
         btnThemSach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final StorageReference ref = firebaseStorage.getReference().child("sach")
+                final StorageReference ref = Singleton.firebaseStorage.getReference().child("sach")
                         .child(System.currentTimeMillis()+"");
                 ref.putFile(ImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -101,15 +105,37 @@ public class ThemSachActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 String ten = edTen.getText().toString().trim();
-                                Double gia =Double.parseDouble(edGia.getText().toString().trim());
+                                double gia =Double.parseDouble(edGia.getText().toString().trim());
                                 String sl = edSoLuong.getText().toString().trim();
-                                Sach sach = new Sach();
-                                sach.setTenSach(ten);
-                                sach.setGia(gia);
-                                sach.setSoLuong(Integer.parseInt(sl));
-                                sach.setHinhAnh(uri.toString());
-                                sach.setTheLoai(spTheLoai.getSelectedItem().toString());
-                                TaoMaSach(sach.getTheLoai(),sach);
+                                String tl = spTheLoai.getSelectedItem().toString();
+                                String ha = uri.toString();
+                                //Factory
+
+                                switch (tl)
+                                {
+                                    case "Văn Học":
+                                        ISach sachVanHOc = Factory.GetSach(LoaiSach.VanHoc);
+                                        sachVanHOc.CreateSach(ten,gia,sl,ha,tl,masach);
+                                        break;
+                                    case "Kinh Tế":
+                                        ISach sachKinhTe = Factory.GetSach(LoaiSach.KinhTe);
+                                        sachKinhTe.CreateSach(ten,gia,sl,ha,tl,masach);
+                                        break;
+                                    case "Thiếu Nhi":
+                                        ISach sachThieuNhi = Factory.GetSach(LoaiSach.ThieuNhi);
+                                        sachThieuNhi.CreateSach(ten,gia,sl,ha,tl,masach);
+                                        break;
+                                    case "Giáo Khoa":
+                                        ISach sachGiaoKhoa = Factory.GetSach(LoaiSach.GiaoKhoa);
+                                        sachGiaoKhoa.CreateSach(ten,gia,sl,ha,tl,masach);
+                                        break;
+                                    case "Ngoại Ngữ":
+                                        ISach sachNgoaiNgu = Factory.GetSach(LoaiSach.NgoaiNgu);
+                                        sachNgoaiNgu.CreateSach(ten,gia,sl,ha,tl,masach);
+                                        break;
+                                    default:
+                                        throw new IllegalArgumentException("This bank type is unsupported");
+                                }
                                 finish();
                             }
                         });
@@ -120,9 +146,9 @@ public class ThemSachActivity extends AppCompatActivity {
         });
     }
 
-    public void TaoMaSach(String theLoai,Sach sach) {
+    public static void TaoMaSach(String theLoai,Sach sach) {
 
-        db.getReference("Sach").orderByChild("theLoai").equalTo(theLoai).addListenerForSingleValueEvent(new ValueEventListener() {
+        Singleton.db.getReference("Sach").orderByChild("theLoai").equalTo(theLoai).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listSach.clear();
@@ -138,7 +164,6 @@ public class ThemSachActivity extends AppCompatActivity {
                 String a = String.valueOf(i) ;
                 if(theLoai.equals("Văn Học")){
                     masach = "VH"+a;
-                    Toast.makeText(ThemSachActivity.this,masach, Toast.LENGTH_SHORT).show();
                 }if(theLoai.equals("Kinh Tế")){
                     masach = "KT"+a;
                 }if(theLoai.equals("Thiếu Nhi")){
@@ -150,7 +175,7 @@ public class ThemSachActivity extends AppCompatActivity {
                 }
 
                 sach.setMaSach(masach);
-                db.getReference("Sach").child(masach).setValue(sach);
+                Singleton.db.getReference("Sach").child(masach).setValue(sach);
             }
 
             @Override

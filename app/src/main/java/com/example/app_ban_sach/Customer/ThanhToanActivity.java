@@ -16,16 +16,14 @@ import android.widget.TextView;
 
 import com.example.app_ban_sach.Adapter.GioHangAdapter;
 import com.example.app_ban_sach.Adapter.ThanhToanAdapter;
-import com.example.app_ban_sach.Fragment.GioHangFragment;
 import com.example.app_ban_sach.MainActivity;
 import com.example.app_ban_sach.Models.HoaDon;
 import com.example.app_ban_sach.Models.Sach;
+import com.example.app_ban_sach.Pattern.SingletonPattern.Singleton;
 import com.example.app_ban_sach.R;
-import com.example.app_ban_sach.UI.DangKyActivity;
 import com.example.app_ban_sach.UI.DangNhapActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -38,7 +36,6 @@ public class ThanhToanActivity extends AppCompatActivity implements ThanhToanAda
     private RecyclerView rcGioHang;
     private ThanhToanAdapter thanhToanAdapter;
     private GioHangAdapter gioHangAdapter;
-    FirebaseDatabase db;
     private int tong = 0;
     TextView tvTongTien,tvsl;
     Button btnMua;
@@ -47,20 +44,23 @@ public class ThanhToanActivity extends AppCompatActivity implements ThanhToanAda
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thanh_toan);
+
+        //Singleton
+//        Singleton.GetFirebaseStorage();
+
         back = findViewById(R.id.tvthanhback);
         tvTongTien = findViewById(R.id.tv_TongTien);
         tvsl = findViewById(R.id.tvSoLuongMua);
         btnMua = findViewById(R.id.btn_Thanhtoan);
 
         list = new ArrayList<>();
-        db = FirebaseDatabase.getInstance();
         //Adapter sách
         rcGioHang = findViewById(R.id.spThanhToan);
         LinearLayoutManager linearLayout = new LinearLayoutManager(ThanhToanActivity.this, RecyclerView.VERTICAL,false);
         rcGioHang.setLayoutManager(linearLayout);
         thanhToanAdapter = new ThanhToanAdapter(ThanhToanActivity.this,list,this);
         rcGioHang.setAdapter(thanhToanAdapter);
-        db.getReference("GioHang").child(idUSer).child("Sach").addValueEventListener(new ValueEventListener() {
+        Singleton.db.getReference("GioHang").child(idUSer).child("Sach").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
@@ -111,9 +111,9 @@ public class ThanhToanActivity extends AppCompatActivity implements ThanhToanAda
                 hd.setTenKhachHang(DangNhapActivity.curUser.getTenNguoiDung());
                 hd.setThanhTien(tong);
 
-                db.getReference("HoaDon").child(ngayThueSach).setValue(hd);
-                db.getReference("HoaDon").child(ngayThueSach).child("chiTietGioHang").setValue(list);
-                db.getReference("GioHang").child(DangNhapActivity.auth.getUid()).child("Sach").removeValue();
+                Singleton.db.getReference("HoaDon").child(ngayThueSach).setValue(hd);
+                Singleton.db.getReference("HoaDon").child(ngayThueSach).child("chiTietGioHang").setValue(list);
+                Singleton.db.getReference("GioHang").child(DangNhapActivity.auth.getUid()).child("Sach").removeValue();
 
                 showAlertDialogButtonClicked(v);
                 list.clear();

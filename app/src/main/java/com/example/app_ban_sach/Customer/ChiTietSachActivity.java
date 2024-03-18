@@ -15,20 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.app_ban_sach.Adapter.SachAdapter;
-import com.example.app_ban_sach.Fragment.GioHangFragment;
 import com.example.app_ban_sach.MainActivity;
 import com.example.app_ban_sach.Models.Sach;
-import com.example.app_ban_sach.Models.TaiKhoan;
+import com.example.app_ban_sach.Pattern.SingletonPattern.Singleton;
 import com.example.app_ban_sach.R;
 import com.example.app_ban_sach.UI.DangNhapActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.platforminfo.DefaultUserAgentPublisher;
 import com.squareup.picasso.Picasso;
 
-import java.io.PipedInputStream;
 import java.util.ArrayList;
 
 public class ChiTietSachActivity extends AppCompatActivity implements SachAdapter.CallBack{
@@ -37,7 +33,6 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
     RecyclerView rcSachTuongTu;
     private ArrayList<Sach> listSach;
     SachAdapter sachAdapter;
-    FirebaseDatabase db;
     Button btnThemGH,btnMua;
     Sach curSach;
     TextView tvMota;
@@ -46,7 +41,8 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_sach);
-        db = FirebaseDatabase.getInstance();
+        //Singleton
+//        Singleton.GetFirebaseStorage();
 
         tvTenSach = findViewById(R.id.tv_TenSach);
         tvGiaSach = findViewById(R.id.tv_Gia);
@@ -84,7 +80,7 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
 
         sachAdapter = new SachAdapter(ChiTietSachActivity.this,listSach,this);
         rcSachTuongTu.setAdapter(sachAdapter);
-        db.getReference("Sach").orderByChild("theLoai").equalTo(theLoai).addValueEventListener(new ValueEventListener() {
+        Singleton.db.getReference("Sach").orderByChild("theLoai").equalTo(theLoai).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot danhsach : snapshot.getChildren())
@@ -105,7 +101,7 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
         btnThemGH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.getReference("GioHang").child(DangNhapActivity.auth.getUid()).child("Sach").child(maSach).setValue(curSach);
+                Singleton.db.getReference("GioHang").child(DangNhapActivity.auth.getUid()).child("Sach").child(maSach).setValue(curSach);
                 Toast.makeText(ChiTietSachActivity.this, "Thêm Giỏ Hàng Thành Công", Toast.LENGTH_SHORT).show();
             }
         });
