@@ -76,6 +76,7 @@ public class TrangChuFragment extends Fragment implements  SachAdapter.CallBack 
                 for(DataSnapshot danhsach : snapshot.getChildren())
                 {
                     Sach sach = danhsach.getValue(Sach.class);
+
                     listSach.add(sach);
                 }
                 sachAdapter.notifyDataSetChanged();

@@ -3,6 +3,7 @@ package com.example.app_ban_sach.Pattern.FactoryPattern;
 import static com.example.app_ban_sach.Admin.ThemSachActivity.TaoMaSach;
 
 import com.example.app_ban_sach.Models.Sach;
+import com.example.app_ban_sach.Pattern.BuilderPattern.SachBuilder;
 
 public class SachGiaoKhoa implements ISach{
     @Override
@@ -15,4 +16,11 @@ public class SachGiaoKhoa implements ISach{
         sach.setTheLoai(tl);
         TaoMaSach(sach.getTheLoai(), sach);
     }
+    /*@Override
+    public Sach TaoSach(){
+        SachBuilder builder = new SachBuilder();
+        builder.setMaSach("69");
+        Sach sach = builder.build();
+        return new sach;
+    }*/
 }

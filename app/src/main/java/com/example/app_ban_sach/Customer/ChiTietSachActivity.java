@@ -74,6 +74,7 @@ public class ChiTietSachActivity extends AppCompatActivity implements SachAdapte
 
 
 
+
         // RecycleView Sách tương tự
         LinearLayoutManager linearLayout = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
         rcSachTuongTu.setLayoutManager(linearLayout);
