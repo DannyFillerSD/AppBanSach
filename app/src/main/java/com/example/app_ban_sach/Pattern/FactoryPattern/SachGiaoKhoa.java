@@ -2,6 +2,7 @@ package com.example.app_ban_sach.Pattern.FactoryPattern;
 
 import static com.example.app_ban_sach.Admin.ThemSachActivity.TaoMaSach;
 
+
 import com.example.app_ban_sach.Models.Sach;
 import com.example.app_ban_sach.Pattern.BuilderPattern.SachBuilder;
 
@@ -15,6 +16,14 @@ public class SachGiaoKhoa implements ISach{
         sach.setHinhAnh(uri);
         sach.setTheLoai(tl);
         TaoMaSach(sach.getTheLoai(), sach);
+
+//        SachBuilder builder = new SachBuilder();
+//        builder.setTenSach(ten);
+//        builder.setGia(gia);
+//        builder.setSoLuong(Integer.parseInt(sl));
+//        builder.setHinhAnh(uri);
+//        builder.setTheLoai(tl);
+//        TaoMaSach(builder.getTheLoai(),builder.build());
     }
     /*@Override
     public Sach TaoSach(){

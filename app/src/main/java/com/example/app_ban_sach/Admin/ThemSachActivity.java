@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.app_ban_sach.Models.Sach;
+import com.example.app_ban_sach.Pattern.BuilderPattern.SachBuilder;
 import com.example.app_ban_sach.Pattern.FactoryPattern.Factory;
 import com.example.app_ban_sach.Pattern.FactoryPattern.ISach;
 import com.example.app_ban_sach.Pattern.FactoryPattern.LoaiSach;
@@ -185,7 +186,45 @@ static ArrayList<Sach> listSach = new ArrayList<>();
         });
 
     }
-
+//    public static void TaoMaSachBuilder(String theLoai, SachBuilder sach) {
+//
+//        Singleton.db.getReference("Sach").orderByChild("theLoai").equalTo(theLoai).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                listSach.clear();
+//                for(DataSnapshot danhsach : snapshot.getChildren())
+//                {
+//                    Sach sach = danhsach.getValue(Sach.class);
+//                    listSach.add(sach);
+//                }
+//
+//                int i = listSach.size();
+//                i = i+1;
+////                Toast.makeText(ThemSachActivity.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
+//                String a = String.valueOf(i) ;
+//                if(theLoai.equals("Văn Học")){
+//                    masach = "VH"+a;
+//                }if(theLoai.equals("Kinh Tế")){
+//                    masach = "KT"+a;
+//                }if(theLoai.equals("Thiếu Nhi")){
+//                    masach = "TN"+a;
+//                }if(theLoai.equals("Giáo Khoa")){
+//                    masach = "GK"+a;
+//                }if(theLoai.equals("Ngoại Ngữ")){
+//                    masach = "NN"+a;
+//                }
+//
+//                sach.setMaSach(masach);
+//                Singleton.db.getReference("Sach").child(masach).setValue(sach);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//    }
     private void UploadImage() {
         Dexter.withContext(this)
                 .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)

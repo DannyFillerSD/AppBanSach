@@ -39,5 +39,34 @@ public class SachBuilder {
     private String hinhAnh;
     private String maSach;
     private int soLuong = 1;
+
+    public String getTenSach() {
+        return tenSach;
+    }
+
+    public String getTheLoai() {
+        return theLoai;
+    }
+
+    public double getGia() {
+        return gia;
+    }
+
+    public String getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public String getMaSach() {
+        return maSach;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
     private String moTa ;
 }
